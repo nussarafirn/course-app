@@ -8,3 +8,6 @@ prereqs VARCHAR(255) NOT NULL);
 
 INSERT INTO Courses
 VALUES('TCSS343', 'Algorithms', 'A very hard class', 'TCSS342');
+
+INSERT INTO Courses
+VALUES('TCSS450', 'Mobile App', 'My favorite class', 'TCSS360');
