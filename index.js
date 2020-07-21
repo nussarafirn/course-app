@@ -35,6 +35,27 @@ app.post("/hello", (req, res) => {
     });
 });
 
+app.get("/params", (req, res) => {
+    res.send({
+        message: "Hello " + req.query['name'] + "!"
+    });
+});
+
+app.post("/params", (req, res) => {
+    res.send({
+        //req.query is reference to argument in the POST body
+        message: "Hello, " + req.body['name'] + "! You sent a POST request"
+    });
+});
+
+app.get("/wait", (req, res) => {
+    setTimeout(() => {
+        res.send({
+            message: "Thanks for waiting"
+        });
+    }, 1000);
+});
+
 /*
  * Return HTML for the / end point. 
  * This is a nice location to document your web service API
