@@ -76,7 +76,7 @@ app.post("/addcourse", (req, res) => {
                 console.log(err);
                 res.send({
                     success: false,
-                    error: err
+                    error: `${err} ${id} ${shortdesc} ${longdesc} ${prereqs}`
                 });
             });
     } else {
