@@ -13,97 +13,17 @@ const pgp = require('pg-promise')();
 pgp.pg.defaults.ssl = true;
 
 //Create connection to Heroku Database
-let db = pgp(process.env.DATABASE_URL);
+const db = require('./utilities/sqlconn');
 
-if(!db) {
-   console.log("Please make sure that postgres is an addon!");
-   process.exit(1);
-}
+app.use('/register', require('./routes/register.js'));
 
-/*
- * Hello world functions below...
- */
-app.get("/hello", (req, res) => {
-    res.send({
-        message: "Hello, you sent a GET request"
-    });
-});
+app.use('/hello', require('./routes/hello.js'));
 
-app.post("/hello", (req, res) => {
-    res.send({
-        message: "Hello, you sent a POST request"
-    });
-});
+app.use('/params', require('./routes/params.js'));
 
-app.get("/params", (req, res) => {
-    res.send({
-        message: "Hello " + req.query['name'] + "!"
-    });
-});
+app.use('/wait', require('./routes/wait.js'));
 
-app.post("/params", (req, res) => {
-    res.send({
-        //req.query is reference to argument in the POST body
-        message: "Hello, " + req.body['name'] + "! You sent a POST request"
-    });
-});
-
-app.get("/wait", (req, res) => {
-    setTimeout(() => {
-        res.send({
-            message: "Thanks for waiting"
-        });
-    }, 1000);
-});
-
-app.post("/addcourse", (req, res) => {
-    //params for courses
-    let id = req.body['id'];
-    let shortdesc = req.body['shortdesc'];
-    let longdesc = req.body['longdesc'];
-    let prereqs = req.body['prereqs'];
-
-    if (id && shortdesc && longdesc && prereqs) {
-        db.none("INSERT INTO courses VALUES ($1, $2, $3, $4)",
-            [id, shortdesc, longdesc, prereqs])
-            .then(() => {
-                //We successfully added the course, let the user know
-                res.send({
-                    success: true
-                });
-            }).catch((err) => {
-                //log the error
-                console.log(err);
-                res.send({
-                    success: false,
-                    error: `${err} ${id} ${shortdesc} ${longdesc} ${prereqs}`
-                });
-            });
-    } else {
-        res.send({
-            success: false,
-            input: req.body,
-            error: "Missing required information"
-        });
-    }
-});
-
-app.get("/courses", (req, res) => {
-    db.manyOrNone('SELECT * FROM courses')
-        //If successful, run function passed into .then()
-        .then((data) => {
-            res.send({
-                success: true,
-                courses: data
-            });
-        }).catch((error) => {
-            console.log(error);
-            res.send({
-                success: false,
-                error: error
-            })
-        });
-});
+app.use('/', require('./routes/coursessql.js'))
 
 /*
  * Return HTML for the / end point. 
@@ -115,7 +35,7 @@ app.get("/", (req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
     for (i = 1; i < 7; i++) {
         //write a response to the client
-        res.write('<h' + i + ' style="color:blue">Hello World!</h' + i + '>'); 
+        res.write('<h' + i + ' style="color:#0000ff">Hello World!</h' + i + '>');
     }
     res.end(); //end the response
 });
