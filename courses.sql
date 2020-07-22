@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS Courses;
 
+
 CREATE TABLE Courses
 (id VARCHAR(15) PRIMARY KEY,
 shortDesc VARCHAR(255) NOT NULL,
@@ -11,3 +12,5 @@ VALUES('TCSS343', 'Algorithms', 'A very hard class', 'TCSS342');
 
 INSERT INTO Courses
 VALUES('TCSS450', 'Mobile App', 'My favorite class', 'TCSS360');
+
+select * from Courses
