@@ -61,11 +61,11 @@ app.post("/addcourse", (req, res) => {
     let id = req.body['id'];
     let shortdesc = req.body['shortdesc'];
     let longdesc = req.body['longdesc'];
-    let prereq = req.body['prereqs'];
+    let prereqs = req.body['prereqs'];
 
-    if (id && shortdesc && longdesc && prereq) {
+    if (id && shortdesc && longdesc && prereqs) {
         db.none("INSERT INTO courses VALUES ($1, $2, $3, $4)",
-            [id, shortdesc, longdesc, prereq])
+            [id, shortdesc, longdesc, prereqs])
             .then(() => {
                 //We successfully added the course, let the user know
                 res.send({
