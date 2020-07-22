@@ -14,6 +14,9 @@ pgp.pg.defaults.ssl = true;
 
 //Create connection to Heroku Database
 const db = require('./utilities/sqlconn');
+let middleware = require('./utilities/middleware');
+
+app.use('/login', require('./routes/login.js'));
 
 app.use('/register', require('./routes/register.js'));
 

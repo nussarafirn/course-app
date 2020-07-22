@@ -8,4 +8,3 @@ CREATE TABLE Members (MemberID SERIAL PRIMARY KEY,
                         SALT VARCHAR(255),
                         Verification INT DEFAULT 0
   );
-
