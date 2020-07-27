@@ -1,5 +1,5 @@
-# UW Course Application
-Add/remove courses application for wide range of usages in furether development.
+# Course Application
+Add/remove courses application for wide range of usages in further development.
 
 ## Description of Files in this package
 * `package.json` and `package-lock.json`
