@@ -1,4 +1,7 @@
-# Description of Files in this package
+# UW Course Application
+Add/remove courses application for wide range of usages in furether development.
+
+## Description of Files in this package
 * `package.json` and `package-lock.json`
     * These files are used to describe dependencies for the project. There are several packages we use for connecting to databases, connecting to our Mail client, etc.
     * Highly recommended reading: https://docs.npmjs.com/files/package.json
